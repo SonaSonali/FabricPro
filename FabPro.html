@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Create a canvas-type
+		image with JavaScript
+	</title>
+
+	<!-- Loading the FabricJS library -->
+	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.2/fabric.min.js">
+	</script>
+</head>
+
+<body>
+	<canvas id="canvas" width="600" height="400"
+		style="border:1px solid #000000">
+	</canvas>
+
+	<!-- Add the image to be used in the canvas
+		and hide it here because only need it
+		inside the canvas -->
+	<img style="display: none;" src=
+"https://media.istockphoto.com/photos/natural-cosmetics-picture-id1163013366?s=612x612"
+				id="my-image" alt="">
+
+
+
+			
+	<script>
+		// Initiate a Canvas instance
+		var canvas = new fabric.Canvas("canvas");
+
+		// Get the image element
+		var image = document.getElementById('my-image');
+
+		// Initiate a Fabric instance
+		var fabricImage = new fabric.Image(image);
+
+		// Add the image to canvas
+		canvas.add(fabricImage);
+
+
+// adding zoom in and zoom out
+
+canvas.on('mouse:wheel', function(opt) {
+  var delta = opt.e.deltaY;
+  var zoom = canvas.getZoom();
+  zoom *= 0.999 ** delta;
+  if (zoom > 20) zoom = 20;
+  if (zoom < 0.01) zoom = 0.01;
+  canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+  opt.e.preventDefault();
+  opt.e.stopPropagation();
+});
+    
+	</script>
+</body>
+
+</html>
